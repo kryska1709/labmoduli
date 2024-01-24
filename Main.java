@@ -9,8 +9,8 @@ public class Main {
         double sum=0;
         if (x > 0.5) {
             for (int i=0; i< n; i++) {
-                double chislitel = Math.pow((x - 1), (n + 1));
-                double znamenatel = (n + 1) * (Math.pow((x + 1), (n + 1)));
+                double chislitel = Math.pow((x - 1), (i + 1));
+                double znamenatel = (i + 1) * (Math.pow((x + 1), (i + 1)));
                 double drobb = chislitel / znamenatel;
                 sum += drobb;
             }
