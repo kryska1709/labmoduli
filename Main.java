@@ -3,7 +3,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan=new Scanner(System.in);
         System. out. println("введите  целое число n") ;
-        int n=scan.nextInt() ;
+        int n=scan.nextInt();
         System.out.println("введите х ,чтобы оно было больше 0.5");
         double x= scan.nextDouble();
         double sum=0;
@@ -22,3 +22,4 @@ public class Main {
         }
     }
 }
+
