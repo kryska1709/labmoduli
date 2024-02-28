@@ -1,67 +1,40 @@
-//*Определить класс Reader, хранящий информацию о пользователе библиотеки: ФИО, номер читательского билета, факультет, дата рождения, телефон.
-//В программе создается массив из пяти объектов данного класса. Перегрузить методы takeBook(), returnBook():
-//- takeBook, который будет принимать количество взятых книг. Выводит на консоль сообщение "Петров В. В. взял 3 книги".
-//- takeBook, который будет принимать переменное количество названий книг. Выводит на консоль сообщение "Петров В. В. взял книги: Приключения, Словарь, Энциклопедия".
-//Аналогичным образом перегрузить метод returnBook(). Выводит на консоль сообщение "Петров В. В. вернул книги: Приключения, Словарь, Энциклопедия". Или "Петров В. В. вернул 3 книги".*//
-import java.util.Arrays;
+//*1. Создать массив объектов с полями: Фамилия и инициалы, Должность, Год поступления на работу, Зарплата.
+// Вывести: а) список работников, зарплата которых больше заданной;
+// б) список работников, занимающих заданную должность.*//
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-    Scanner ok = new Scanner(System.in);
-    int kolvoknig;
-    String [] nameKnig=new String[6];
-    nameKnig[0]="приключения тома сойера";
-    nameKnig[1]="все ради игры";
-    nameKnig[2]="буратино";
-    nameKnig[3]="сильнее страха";
-    nameKnig[4]="незнайка";
-    nameKnig[5]="изумрудный город";
-    Reader [] reads= new Reader[5];
-    reads[0]=new Reader("Иванов А.Б.",834792,"психология","17.09.2003","89263746215");
-    reads[1]=new Reader("Лисов И.В.",892637,"Физика","11.12.2004","89253236135");
-    reads[2]=new Reader("Кириллов А.И.",283716,"Экономика","13.01.2005","8926293215");
-    reads[3]=new Reader("Росик Д.Д.",928374,"Математика","23.04.2002","89263020915");
-    reads[4]=new Reader("Староверов Д.Л.",162734,"Медицинский","29.02.2004","8920900215");
-    reads[0].takeBook(6);
-    reads[1].takeBook(nameKnig[1], nameKnig[2], nameKnig[3]);
-    reads[2].returnBook(5);
-    reads[3].returnBook(nameKnig[0], nameKnig[1]);
-    reads[4].takeBook(1);
+    Scanner ok= new Scanner(System.in);
+    System.out.println("введите искомую должность");
+    String dolznost=ok.next();
+    System.out.println("введите зпшечку)");
+    double zppshka=ok.nextDouble();
+    Raby [] rab= new Raby[5];
+        rab[0]=new Raby("Уханов А.А", "начальник отдела", "19.02.2022", 40000);
+        rab[1]=new Raby("Парвадов П.Ю", "директор", "11.09.2017", 80000);
+        rab[2]=new Raby("Фетисов С.Г", "уборщик", "19.02.2022", 2000);
+        rab[3]=new Raby("Лапицкий Д.В", "создатель феррари", "11.03.2001", 500000);
+        rab[4]=new Raby("Дулатов И.И", "колодцекопатель", "27.02.2024", 6000);
+        for(int i=0;i<rab.length;i++)
+        {
+            if (zppshka < rab[i].zpshka) {
+                System.out.println("вор в законе с зарплатой больше "+zppshka+" "+rab[i].fio);
+            }
+            if (dolznost == rab[i].dolzhnost) {
+                System.out.println("работники занимающие должность "+ dolznost+" "+rab[i].dolzhnost);
+            }
+        }
     }
 }
-class Reader{
-    private String Name;
-    private int Nomerbil;
-    private String Facultet;
-    private String Daterozh;
-    private String Phone;
-    public Reader(String Name, int Nomerbil,String Facultet,String Daterozh,String Phone){
-        this.Name=Name;
-        this.Nomerbil=Nomerbil;
-        this.Facultet=Facultet;
-        this.Daterozh=Daterozh;
-        this.Phone=Phone;
+class  Raby{
+    String fio;
+    String dolzhnost;
+    String gotpostuprab;
+    double zpshka;
+    public Raby(String fio,String dolzhnost,String gotpostuprab,double zpshka){
+        this.fio=fio;
+        this.dolzhnost=dolzhnost;
+        this.gotpostuprab=gotpostuprab;
+        this.zpshka=zpshka;
     }
-    public void takeBook(int kolvoknig){
-        System.out.println(this.Name+"взял "+kolvoknig+" книг");
-    }
-    public void takeBook(String... nameKnig){
-        System.out.println(this.Name+"взял ");
-        for (String knigi :nameKnig ) {
-            System.out.print("\"" + knigi + "\""  + ", ");
-        }
-        System.out.println();
-    }
-    public void returnBook(int kolvoknig){
-        System.out.println(this.Name+"вернул "+kolvoknig+" книг");
-    }
-    public void returnBook(String... nameKnig){
-        System.out.println(this.Name+"вернул ");
-            for (String knigi : nameKnig) {
-                System.out.print("\"" + knigi + "\""  + ", ");
-            }
-        System.out.println();
-        }
-    }
-//"\"" + nameKnig[0] + "\""  + ", " + "\"" + nameKnig[3] + "\""
-//"\"" + nameKnig[1] + "\""  + ", " + "\"" + nameKnig[2] +  "\"" + ", " + "\""+ nameKnig[0] + "\"" + ", " + "\""+ nameKnig[4]+"\"" + ", " + "\""+nameKnig[5]+"\""
+}
