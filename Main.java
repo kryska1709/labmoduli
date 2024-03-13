@@ -1,65 +1,69 @@
-//*Создать класс Person с private полем возраст и public полями ФИО, Телефон.
-// Создать класс-наследник Student с дополнительными public полями - Курс, Факультет и private полем дата поступления.
-// Создать массив из трех объектов класса Student. Вывести: а) ФИО и возраст всех студентов
-// б) список студентов заданного факультета; в) список студентов, поступивших после заданного года.
-import java.util.Scanner;
-class Person {
-    private int age;
+//*Создать интерфейс "Пользователь"с методами, работающие с логином и паролем.
+// Создать абстрактный класс People, применяющий этот интерфейс, с полями "ФИО",
+// "возраст", "должность". Создать два класса-наследника - "Преподаватель" и "Студент". Создать по два объекта данных классов.
+interface Polzovatel{
+    void login();
+    void passvord();
+}
+abstract class People implements Polzovatel {
     public String fio;
-    public String phone;
+    public int age;
+    public String dolznost;
+    public String pass;
+    public String log;
 
-    Person(String fio, int age, String phone) {
+    public abstract void login();
+
+    public abstract void passvord();
+
+    public People(String fio, int age, String dolznost, String pass, String log) {
         this.fio = fio;
         this.age = age;
-        this.phone = phone;
+        this.dolznost = dolznost;
+        this.log = log;
+        this.pass = pass;
     }
+}
+    class Teacher extends People{
+    public Teacher(String fio,int age, String dolznost, String pass,String log){
+        super(fio,age,dolznost,pass,log);
+    }
+        public void login(){
+            System.out.println("Логин преподавателя: " + log );
 
-    public int getAge() {
-        return this.age;
+        }
+        public void passvord(){
+            System.out.println("Пароль преподавателя: " + pass );
+
+        }
     }
-}
-class Student extends Person{
-    public int kyrs;
-    public String facult;
-    private int datapostup;
-    public int getDatapostup(){
-        return datapostup;
+    class Student extends People{
+        public Student(String fio,int age, String dolznost, String pass,String log){
+            super(fio,age,dolznost,pass,log);
+        }
+        public void login(){
+            System.out.println("Логин cудента: " + log );
+
+        }
+        public void passvord(){
+            System.out.println("Пароль студента: " + pass );
+
+        }
     }
-    Student(String fio,int age,String phone,int kyrs,String facult,int datapostup){
-    super(fio,age,phone);
-    this.kyrs=kyrs;
-    this.facult=facult;
-    this.datapostup=datapostup;
-    }
-}
 
 public class Main {
     public static void main(String[] args) {
-    Scanner ok=new Scanner(System.in);
-    Student[] stud=new Student[3];
-    stud[0]=new Student("Шастун Антон Михайлович",19,"89371872632",2,"грифиндор",2021);
-    stud[1]=new Student("Попов Арсений Сергеевич",20,"89379582732",3,"слизерин",2020);
-    stud[2]=new Student("Позов Дмитрий Тимурович",21,"89379482632",4,"пуфендуй",2019);
-    for (Student st: stud){
-    System.out.println("фио студента: "+st.fio);}
-        for (Student st: stud) {
-            System.out.println("возраст студента: "+st.getAge());}
-    System.out.println("введите факультет, студентов которого  хотите узнать ");
-        String facul = ok.next();
-
-        for (Student stu : stud) {
-            if (facul.equals(stu.facult)) {
-                System.out.println(stu.fio);
-            }
-        }
-
-        System.out.println("введите год");
-        int god = ok.nextInt();
-
-        for (Student stude : stud) {
-            if (god<stude.getDatapostup()) {
-                System.out.println(stude.fio);
-            }
-        }
+        Student student1 = new Student("Матвиенко Сергей Васильевич", 10, "Студент", "serezamolodes", "7162534");
+        student1.passvord();
+        student1.login();
+        Student student2 = new Student("Попов Арсений Сергеевич", 21, "Студент", "popopupop", "ponkping");
+        student2.passvord();
+        student2.login();
+        Teacher teacher1 = new Teacher("Позов Дмитрий Тимурович", 32, "Преподаватель математики", "pozlalala", "lasral");
+        teacher1.login();
+        teacher1.passvord();
+        Teacher teacher2 = new Teacher("Шастун Антон Евгеньевич", 27, "Преподаватель физики", "shast", "braslet");
+        teacher2.login();
+        teacher2.passvord();
     }
 }
