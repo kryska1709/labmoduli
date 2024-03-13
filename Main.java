@@ -1,98 +1,65 @@
-//*Создать класс Animal и расширяющие его классы Dog, Cat, Horse.
-// Класс Animal содержит переменные food, location и методы makeNoise, eat, sleep.
-// Метод makeNoise, например, может выводить на консоль "Такое-то животное спит".
-// Dog, Cat, Horse переопределяют методы makeNoise, eat.
-// Добавьте переменные в классы Dog, Cat, Horse, характеризующие только этих животных.
-// Создайте класс Ветеринар, в котором определите метод void treatAnimal(Animal animal).
-// Пусть этот метод распечатывает food и location пришедшего на прием животного.
+//*Создать класс Person с private полем возраст и public полями ФИО, Телефон.
+// Создать класс-наследник Student с дополнительными public полями - Курс, Факультет и private полем дата поступления.
+// Создать массив из трех объектов класса Student. Вывести: а) ФИО и возраст всех студентов
+// б) список студентов заданного факультета; в) список студентов, поступивших после заданного года.
+import java.util.Scanner;
+class Person {
+    private int age;
+    public String fio;
+    public String phone;
+
+    Person(String fio, int age, String phone) {
+        this.fio = fio;
+        this.age = age;
+        this.phone = phone;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+}
+class Student extends Person{
+    public int kyrs;
+    public String facult;
+    private int datapostup;
+    public int getDatapostup(){
+        return datapostup;
+    }
+    Student(String fio,int age,String phone,int kyrs,String facult,int datapostup){
+    super(fio,age,phone);
+    this.kyrs=kyrs;
+    this.facult=facult;
+    this.datapostup=datapostup;
+    }
+}
 
 public class Main {
     public static void main(String[] args) {
-    Dog bady=new Dog("косточку","на лежаке","проси");
-    Cat rizik=new Cat("сметану","на диване","мышкой");
-    Horse kometa= new Horse("морковь","в деннике","вальтрап, уздечка");
-    bady.makeNoise();
-    rizik.makeNoise();
-    kometa.makeNoise();
-    bady.eat();
-    rizik.eat();
-    kometa.eat();
-    Veterinar vet=new Veterinar();
-    vet.treatAnimal(bady);
-    vet.treatAnimal(rizik);
-    vet.treatAnimal(kometa);
-    }
-}
-class Animal{
-String food;
-String location;
-public Animal(String food,String location){
-    this.food=food;
-    this.location=location;
-}
-    public void makeNoise(){
-    System.out.println("животное спит ");
-    }
-    public void eat(){
-    System.out.println("животное ест "+food);
-    }
-    public void sleep(){
-    System.out.println("животное спит "+location);
-    }
-}
-class Dog extends Animal{
-public String command;//команда
-public Dog(String food,String location,String command){
-    super(food, location);
-    this.command=command;
-    }
+    Scanner ok=new Scanner(System.in);
+    Student[] stud=new Student[3];
+    stud[0]=new Student("Шастун Антон Михайлович",19,"89371872632",2,"грифиндор",2021);
+    stud[1]=new Student("Попов Арсений Сергеевич",20,"89379582732",3,"слизерин",2020);
+    stud[2]=new Student("Позов Дмитрий Тимурович",21,"89379482632",4,"пуфендуй",2019);
+    for (Student st: stud){
+    System.out.println("фио студента: "+st.fio);}
+        for (Student st: stud) {
+            System.out.println("возраст студента: "+st.getAge());}
+    System.out.println("введите факультет, студентов которого  хотите узнать ");
+        String facul = ok.next();
 
-    @Override
-    public void makeNoise() {
-        System.out.println("собака выполняет команду "+command);
-    }
+        for (Student stu : stud) {
+            if (facul.equals(stu.facult)) {
+                System.out.println(stu.fio);
+            }
+        }
 
-    @Override
-    public void eat() {
-        System.out.println("собака ест "+food);
-    }
-}
-class Cat extends Animal{
-    public String plays;//игрушка
-    public Cat(String food,String location,String plays){
-        super(food, location);
-        this.plays=plays;
-    }
+        System.out.println("введите год");
+        int god = ok.nextInt();
 
-    @Override
-    public void makeNoise() {
-        System.out.println("кошка играет с "+plays);
-    }
-
-    @Override
-    public void eat() {
-        System.out.println("кошка ест "+food);
-    }
-}
-class Horse extends Animal{
-    public String amunice;//амуниция
-    public Horse(String food,String location,String amunice){
-        super(food, location);
-        this.amunice=amunice;
-    }
-
-    @Override
-    public void makeNoise() {
-        System.out.println("на лошади сейчас "+amunice);
-    }
-
-    @Override
-    public void eat() {
-        System.out.println("лошадь ест "+food);
-    }
-}
-class Veterinar{
-    public void treatAnimal(Animal animal){
-        System.out.println("животное ело "+animal.food+", отдыхало "+ animal.location);
+        for (Student stude : stud) {
+            if (god<stude.getDatapostup()) {
+                System.out.println(stude.fio);
+            }
+        }
     }
 }
